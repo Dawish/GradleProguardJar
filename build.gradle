@@ -1,0 +1,80 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.14.+'
+    }
+    
+}
+apply plugin: 'com.android.library'
+
+dependencies {
+	compile 'com.android.support:support-v4:+'
+}
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.1.0"
+    enforceUniquePackageName=false
+    
+    lintOptions {
+        abortOnError false
+    }
+
+   dexOptions {
+        preDexLibraries = false
+    }
+ buildTypes {
+		release{
+		 minifyEnabled true
+		 proguardFiles getDefaultProguardFile('proguard-android.txt'),'proguard-project.txt'
+		}
+    }
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+
+        instrumentTest.setRoot('tests')
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+              
+    }
+    
+}
+
+ /** task makeJar(type: Copy){
+  *from('build/intermediates/bundles/release')
+  *into('output/')
+  *include('classes.jar')
+  *rename('classes.jar', 'danxingxitest' + '-' +  '-release' + '.jar')
+  *}
+  *makeJar.dependsOn(build)
+  **/
+
+build.doLast {
+	def today = new Date().format('yyyyMMdd');
+	def name = 'authSdk';
+	copy{
+		from('build/intermediates/bundles/release')
+		into('output/' + today)
+		include('classes.jar')
+		rename('classes.jar', name +'-' + today + '-release' + '.jar')
+	}
+}
+
+/**
+ *从Manifest.xml中读取版本号
+ 
+ def readVersion(){
+	 def manifestParser = new DefaultManifestParser()
+	 return manifestParser.getVersionName(android.sourceSets.main.manifest.srcFile);
+ }
+ **/
