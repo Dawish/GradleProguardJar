@@ -29,19 +29,19 @@
 
 -keep public class com.example.gradlejar.*
 -keep public class com.example.gradlejar.*{
-		<fields>;
+	<fields>;
         <methods>;
 	}
 
--keep public class com.wasu.thirdparty.image.*
--keep public class com.wasu.thirdparty.image.*{
-		<fields>;
+-keep public class com.danxx.thirdparty.image.*
+-keep public class com.danxx.thirdparty.image.*{
+	<fields>;
         <methods>;
 	}
 	
--keep public class com.wasu.thirdparty.net.*
--keep public class com.wasu.thirdparty.net.*{
-		<fields>;
+-keep public class com.danxx.thirdparty.net.*
+-keep public class com.danxx.thirdparty.net.*{
+	<fields>;
         <methods>;
 	}
 
